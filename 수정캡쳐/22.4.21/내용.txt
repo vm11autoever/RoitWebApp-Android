@@ -1,0 +1,30 @@
+[간략설명] 
+우선 push post날릴 때 url을 data에 담아서 보내주고, 
+안드로이드 MainActivity에서 받을 때(OnResume)
+intent에서 url을 꺼내가지고 
+그 url을 웹뷰에 넣어주면 돼. 
+
+그런데 
+앱종료때 푸시(Background)는 파이어베이스가 알아서 넘겨주는데 
+앱 실행 중 푸시(Foreground)는 
+[MyFirebaseMessagingService]의 
+onMessageReceived()함수 안에서 url를 넘겨 받아서 
+intent 안에 그 url을 담아가지고 notification을 발생시키는 처리를 해줘야 돼. 
+
+그리고 로이웹앱이 Android 12 대응이 안되어 있을거야. 
+Mutable 처리해줘야 버그가 안나. 
+
+
+
+1. [PostMan : 푸시 post날리는 것] 
+ -  click_action 넣기. 
+  - data에 url넣어주기. 
+
+2. [MainActivity]  - OnResume
+ - 웹뷰의 loadUrl을 바꿔준다. 
+
+3. [Foreground처리] MyFirebaseMessagingService에서
+3-1 . onMessageReceivedd에서 url 받기. 
+3-2. sendNotification에서 url 넘기기. 
+
+4.  [Android 12 대응] - Mutable 설정
