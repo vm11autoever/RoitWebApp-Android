@@ -68,7 +68,7 @@ import java.net.URL
 class MainActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityMainBinding  //등록하면 별도의 id 설정 없이 가능하다.
-    val TAG = "roitech1"
+    val TAG = "vm11"
 
 
 
@@ -100,6 +100,9 @@ class MainActivity : AppCompatActivity() {
         GetFCMToken()
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
+
+
 
 
 //     #Z-0. 웹뷰 기본설정.
@@ -569,12 +572,15 @@ class MainActivity : AppCompatActivity() {
     override fun onResume() {
 
         var push_url:String=""
-        if(intent.hasExtra("push"))
-            push_url = intent.getStringExtra("push")+""
+        if(intent.hasExtra("push_url"))
+            push_url = intent.getStringExtra("push_url")+""
         Log.d(TAG,"push_url: "+push_url)
-
-
         Log.d(TAG, "onResume")
+
+//        Main_URL = "http://www.naver.com"
+        binding.webview.loadUrl("http://"+push_url)
+
+
         super.onResume()
         registerNetworkCallback()
 
