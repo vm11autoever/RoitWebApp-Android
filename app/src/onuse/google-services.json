@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "350035154453",
+    "project_id": "roit-smartpmis",
+    "storage_bucket": "roit-smartpmis.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:350035154453:android:f38e4c35da9c9cd80ee01c",
+        "android_client_info": {
+          "package_name": "net.smartpmis.roit"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "350035154453-5bnv4th9mdeaku1su4f56vu28p78csho.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCHSN-VdZiDTw0U9cskQFk8iTEwjx9_6kc"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "350035154453-5bnv4th9mdeaku1su4f56vu28p78csho.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
