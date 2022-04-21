@@ -29,10 +29,8 @@ class MyFirebaseMessagingService : FirebaseMessagingService() {
     override fun onMessageReceived(remoteMessage: RemoteMessage) {
         var title: String? = ""
         var message: String? = ""
-
-        var push_url: String? = ""
         var body: String? = ""
-
+        var push_url: String? = ""
         val from = remoteMessage.from
         if (0 < remoteMessage.data.size) {
             push_url = remoteMessage.data["push_url"]
@@ -44,10 +42,6 @@ class MyFirebaseMessagingService : FirebaseMessagingService() {
         }
         Log.d("vm11","push_url : "+push_url);
 
-//        Log.d("vm11",""+message["url"])
-//        Log.d("vm11",url+"  "+body)
-//        message = LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"))
-//        sendNotification(link, title, "상세내용") //아마 noti를 눌렀을떄 발생을 위해 처리한듯.
         sendNotification(push_url, title, "onMessageReceived에서 처리되는 중.") //아마 noti를 눌렀을떄 발생을 위해 처리한듯.
     }
 
@@ -56,12 +50,8 @@ class MyFirebaseMessagingService : FirebaseMessagingService() {
         val channelId = applicationContext.packageName
         val channelName = applicationContext.packageName
         val params = Intent(applicationContext, MainActivity::class.java)
-//        params.putExtra("link-case", link)
         params.putExtra("push_url", link)
-        var str = params.getStringExtra("push_url")
-        Log.d("vm11","push_url : "+str)
         params.addFlags(Intent.FLAG_ACTIVITY_NO_HISTORY)
-
         val intent = PendingIntent.getActivity(
             applicationContext,
             notificationId,

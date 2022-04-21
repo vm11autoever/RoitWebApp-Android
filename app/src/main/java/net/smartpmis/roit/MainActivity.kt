@@ -574,17 +574,12 @@ class MainActivity : AppCompatActivity() {
         var push_url:String=""
         if(intent.hasExtra("push_url"))
             push_url = intent.getStringExtra("push_url")+""
-        Log.d(TAG,"push_url: "+push_url)
         Log.d(TAG, "onResume")
-
-//        Main_URL = "http://www.naver.com"
+        Log.d(TAG,"push_url: "+push_url)
         binding.webview.loadUrl("http://"+push_url)
-
 
         super.onResume()
         registerNetworkCallback()
-
-
     }
 
     override fun onStop() {
