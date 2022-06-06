@@ -75,7 +75,12 @@ class MainActivity : AppCompatActivity() {
 
     //     #B-1. 상용/개발
     var Main_URL = when{
-        BuildConfig.IsDev -> "http://roit.smartpmis.net"//로이 스마트조인 URL
+
+//        vcvp1.hmc.co.kr
+//            https://vccs2.hmc.co.kr"
+//            vccs-dev.hmc.co.kr"
+
+        BuildConfig.IsDev -> "https://janus.conf.meetecho.com/mvideoroomtest.html"//로이 스마트조인 URL
 //        BuildConfig.IsDev -> "http://roit.smartjoin.net"//로이 스마트조인 URL
 //        BuildConfig.IsDev -> "https://gymcoding.github.io/vuetify-admin-template/#/"//vuetify 시연 URL
 //        BuildConfig.IsDev -> "https://roitech1.github.io/fastvue/index.html"
@@ -106,6 +111,9 @@ class MainActivity : AppCompatActivity() {
 
 
 //     #Z-0. 웹뷰 기본설정.
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT)
+            WebView.setWebContentsDebuggingEnabled(true)
+
         binding.webview.run { //객체 생성 후 설정.
             settings.javaScriptEnabled = true
             settings.setSupportMultipleWindows(true) // 새창띄우기 허용여부
@@ -121,10 +129,15 @@ class MainActivity : AppCompatActivity() {
             settings.defaultTextEncodingName = "UTF-8"
             settings.setAppCacheEnabled(true)
             settings.builtInZoomControls = true //화면 확대 축소 허용여부
+            settings.loadsImagesAutomatically = true//WebRTC용.
+            settings.mediaPlaybackRequiresUserGesture=false//WebRTC용.
+//            webview.getSettings().setPluginState(WebSettings.PluginState.ON);
+//            webview.setScrollBarStyle(View.SCROLLBARS_INSIDE_OVERLAY);
             webViewClient = WebViewClientClass()
             webChromeClient = WebChromeClientClass()
             viewTreeObserver.addOnScrollChangedListener { binding.pullToRefresh.isEnabled = (binding.webview.scrollY == 0) } //스크롤뷰
         }
+
 //  ------------------------------------ #Z-0. 웹뷰 기본설정. 끝 -----------------------------------------  //
 
 
