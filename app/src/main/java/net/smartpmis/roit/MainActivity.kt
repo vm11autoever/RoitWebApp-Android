@@ -45,6 +45,7 @@ import java.net.URL
 
 //--------------------------------------------------------------------------------//
 //     #A-1. 당겨서 리프레시, Backward.
+//     #A-2. 자바스크립트 통신.
 //     #A-2-2. 자바스크립트 windows.open
 //     #A-3. 오프라인 처리.
 //     #A-4. Microphone 처리
@@ -70,9 +71,6 @@ class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding  //등록하면 별도의 id 설정 없이 가능하다.
     val TAG = "vm11"
 
-
-
-
     //     #B-1. 상용/개발
     var Main_URL = when{
 
@@ -80,7 +78,7 @@ class MainActivity : AppCompatActivity() {
 //            https://vccs2.hmc.co.kr"
 //            vccs-dev.hmc.co.kr"
 
-        BuildConfig.IsDev -> "https://janus.conf.meetecho.com/mvideoroomtest.html"//로이 스마트조인 URL
+        BuildConfig.IsDev -> "https://vm11autoever.github.io/index.html"//로이 스마트조인 URL
 //        BuildConfig.IsDev -> "http://roit.smartjoin.net"//로이 스마트조인 URL
 //        BuildConfig.IsDev -> "https://gymcoding.github.io/vuetify-admin-template/#/"//vuetify 시연 URL
 //        BuildConfig.IsDev -> "https://roitech1.github.io/fastvue/index.html"
@@ -133,6 +131,8 @@ class MainActivity : AppCompatActivity() {
             settings.mediaPlaybackRequiresUserGesture=false//WebRTC용.
 //            webview.getSettings().setPluginState(WebSettings.PluginState.ON);
 //            webview.setScrollBarStyle(View.SCROLLBARS_INSIDE_OVERLAY);
+            addJavascriptInterface(WebBride(),"AppWebBridge")
+
             webViewClient = WebViewClientClass()
             webChromeClient = WebChromeClientClass()
             viewTreeObserver.addOnScrollChangedListener { binding.pullToRefresh.isEnabled = (binding.webview.scrollY == 0) } //스크롤뷰
@@ -188,6 +188,16 @@ class MainActivity : AppCompatActivity() {
         binding.webview.loadUrl(url)
     }
 
+    //     #A-2. 자바스크립트 통신.
+    class WebBride{
+        @JavascriptInterface
+        fun passString(param : String)
+        {
+            Log.d("vm11", "param: $param ")
+        }
+    }
+
+
     inner class WebChromeClientClass : WebChromeClient() {
 
         //     #Z-2. 웹 콘솔창 디버그용.
@@ -197,6 +207,8 @@ class MainActivity : AppCompatActivity() {
             }
             return true
         }
+
+
 
         //     #A-2-2. 자바스크립트 windows.open
         override fun onCreateWindow(view: WebView?,isDialog: Boolean,isUserGesture: Boolean,resultMsg: Message?
